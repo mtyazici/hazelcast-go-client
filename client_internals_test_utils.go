@@ -27,6 +27,7 @@ import (
 	"github.com/hazelcast/hazelcast-go-client/internal/event"
 	"github.com/hazelcast/hazelcast-go-client/internal/invocation"
 	inearcache "github.com/hazelcast/hazelcast-go-client/internal/nearcache"
+	iproxy "github.com/hazelcast/hazelcast-go-client/internal/proxy"
 	"github.com/hazelcast/hazelcast-go-client/internal/serialization"
 )
 
@@ -60,6 +61,10 @@ func (ci *ClientInternal) Proxies() map[string]interface{} {
 
 func (ci *ClientInternal) ListenerBinder() *cluster.ConnectionListenerBinder {
 	return ci.client.proxyManager.serviceBundle.ListenerBinder
+}
+
+func (ci *ClientInternal) RefIDGenerator() *iproxy.ReferenceIDGenerator {
+	return ci.client.proxyManager.refIDGenerator
 }
 
 func (ci *ClientInternal) NewNearCacheManager(reconInterval, maxMiss int) *inearcache.Manager {
